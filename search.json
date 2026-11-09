@@ -1,0 +1,149 @@
+[
+  {
+    "objectID": "about.html",
+    "href": "about.html",
+    "title": "About",
+    "section": "",
+    "text": "Data Insights is a collection of hands-on R tutorials — from the basics of pipes and functions to data wrangling with the tidyverse and statistics like t-tests and effect sizes.\nWritten by djani."
+  },
+  {
+    "objectID": "posts/kaffee/index.html",
+    "href": "posts/kaffee/index.html",
+    "title": "Kaffee",
+    "section": "",
+    "text": "Die Studiendaten und Ihre Daten Laden Sie die Daten aus der Datei „Studie_KaffeeKonzentration_2025.csv“ in R als Objekt „Kaffee“ .\n\nlibrary(tidyverse)\n\npath &lt;- \"Studie_KaffeeKonzentration_2025.csv\"\n\nkaffee &lt;- read_csv2(path)\n\n# same as \nkaffee &lt;- read_delim(path, \n                     delim  = \";\", \n                     locale = locale(decimal_mark = \",\"))\n\nhelp(read_delim)\n# for read_*() family of functions\n\nI don’t want to conform to klein/groß schreibung.\n\nnames(kaffee)\n#&gt; [1] \"Nummer\"                   \"Kaffeekonsum\"            \n#&gt; [3] \"Gruppe\"                   \"Konzentrationsfaehigkeit\"\n\nkaffee &lt;- \n  kaffee |&gt; \n  janitor::clean_names()\n\nkaffee\n#&gt; # A tibble: 125 x 4\n#&gt;    nummer kaffeekonsum gruppe         konzentrationsfaehigkeit\n#&gt;     &lt;dbl&gt;        &lt;dbl&gt; &lt;chr&gt;                             &lt;dbl&gt;\n#&gt;  1      1         2.96 entkoffeiniert                     66.7\n#&gt;  2      2         3.39 entkoffeiniert                     79.2\n#&gt;  3      3         4.77 entkoffeiniert                     67.0\n#&gt;  4      4         2.51 entkoffeiniert                     71.3\n#&gt;  5      5         3.41 entkoffeiniert                     35.3\n#&gt;  6      6         4.53 entkoffeiniert                     50.6\n#&gt;  7      7         3.09 entkoffeiniert                     87.5\n#&gt;  8      8         2.35 entkoffeiniert                     33.5\n#&gt;  9      9         2.52 entkoffeiniert                     63.2\n#&gt; 10     10         2.95 entkoffeiniert                     66.1\n#&gt; # i 115 more rows\n\nFügen Sie für sich selbst eine Zeile als zusätzliche Versuchsperson hinzu.\n\nkaffee &lt;- \n  kaffee |&gt; \n  add_row(nummer                   = 126,\n          kaffeekonsum             = 4.5, \n          gruppe                   = \"entkoffeiniert\",\n          konzentrationsfaehigkeit = 21.35)"
+  },
+  {
+    "objectID": "posts/kaffee/index.html#aufgabe-1",
+    "href": "posts/kaffee/index.html#aufgabe-1",
+    "title": "Kaffee",
+    "section": "",
+    "text": "Die Studiendaten und Ihre Daten Laden Sie die Daten aus der Datei „Studie_KaffeeKonzentration_2025.csv“ in R als Objekt „Kaffee“ .\n\nlibrary(tidyverse)\n\npath &lt;- \"Studie_KaffeeKonzentration_2025.csv\"\n\nkaffee &lt;- read_csv2(path)\n\n# same as \nkaffee &lt;- read_delim(path, \n                     delim  = \";\", \n                     locale = locale(decimal_mark = \",\"))\n\nhelp(read_delim)\n# for read_*() family of functions\n\nI don’t want to conform to klein/groß schreibung.\n\nnames(kaffee)\n#&gt; [1] \"Nummer\"                   \"Kaffeekonsum\"            \n#&gt; [3] \"Gruppe\"                   \"Konzentrationsfaehigkeit\"\n\nkaffee &lt;- \n  kaffee |&gt; \n  janitor::clean_names()\n\nkaffee\n#&gt; # A tibble: 125 x 4\n#&gt;    nummer kaffeekonsum gruppe         konzentrationsfaehigkeit\n#&gt;     &lt;dbl&gt;        &lt;dbl&gt; &lt;chr&gt;                             &lt;dbl&gt;\n#&gt;  1      1         2.96 entkoffeiniert                     66.7\n#&gt;  2      2         3.39 entkoffeiniert                     79.2\n#&gt;  3      3         4.77 entkoffeiniert                     67.0\n#&gt;  4      4         2.51 entkoffeiniert                     71.3\n#&gt;  5      5         3.41 entkoffeiniert                     35.3\n#&gt;  6      6         4.53 entkoffeiniert                     50.6\n#&gt;  7      7         3.09 entkoffeiniert                     87.5\n#&gt;  8      8         2.35 entkoffeiniert                     33.5\n#&gt;  9      9         2.52 entkoffeiniert                     63.2\n#&gt; 10     10         2.95 entkoffeiniert                     66.1\n#&gt; # i 115 more rows\n\nFügen Sie für sich selbst eine Zeile als zusätzliche Versuchsperson hinzu.\n\nkaffee &lt;- \n  kaffee |&gt; \n  add_row(nummer                   = 126,\n          kaffeekonsum             = 4.5, \n          gruppe                   = \"entkoffeiniert\",\n          konzentrationsfaehigkeit = 21.35)"
+  },
+  {
+    "objectID": "posts/kaffee/index.html#aufgabe-2-kenngrößen",
+    "href": "posts/kaffee/index.html#aufgabe-2-kenngrößen",
+    "title": "Kaffee",
+    "section": "Aufgabe 2 – Kenngrößen",
+    "text": "Aufgabe 2 – Kenngrößen\nBerechnen Sie Mittelwert, Median und Standardabweichung für die Variable „Kaffeekonsum“ über die gesamte Stichprobe.\n\n# als tabelle \nkaffee |&gt; \n  summarise(mean   = mean(kaffeekonsum),\n            median = median(kaffeekonsum),\n            sd     = sd(kaffeekonsum))\n#&gt; # A tibble: 1 x 3\n#&gt;    mean median    sd\n#&gt;   &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;\n#&gt; 1  3.33   3.37 0.849\n\nBerechnen Sie Mittelwerte, Mediane und Standardabweichungen für die Variable „Konzentrationsfähigkeit“ getrennt nach den beiden Gruppen.\n\nkaffee |&gt; \n  group_by(gruppe) |&gt; \n  summarise(mean   = mean(kaffeekonsum),\n            median = median(kaffeekonsum),\n            sd     = sd(kaffeekonsum))\n#&gt; # A tibble: 2 x 4\n#&gt;   gruppe          mean median    sd\n#&gt;   &lt;chr&gt;          &lt;dbl&gt;  &lt;dbl&gt; &lt;dbl&gt;\n#&gt; 1 entkoffeiniert  3.36   3.36 0.982\n#&gt; 2 normal          3.30   3.37 0.704\n\ngroup_by() splits the table into smaller tables for each group in the backround. summarise() is performed on each sub-table. Like this:"
+  },
+  {
+    "objectID": "posts/kaffee/index.html#aufgabe-3-visualisierung",
+    "href": "posts/kaffee/index.html#aufgabe-3-visualisierung",
+    "title": "Kaffee",
+    "section": "Aufgabe 3 – Visualisierung",
+    "text": "Aufgabe 3 – Visualisierung\nStellen Sie die Daten für die Variable „Kaffeekonsum“ über die gesamte Stichprobe in einem Histogramm mit geeigneter Klassenzahl (Ermittlung über Faustformel aus der Vorlesung) dar.\nStellen Sie die Daten für die Variable „Konzentrationsfähigkeit“ getrennt nach den beiden Gruppen in Histogrammen mit geeigneter Klassenzahl (Ermittlung über Faustformel aus der Vorlesung) dar. Die beiden Histogramme sollen nebeneinander in einer Zeile angeordnet sein.\n\n# bins bestimmen\nn &lt;- nrow(kaffee)\nbin &lt;- round(1 + log2(n))\n\nhh &lt;- \n  ggplot(kaffee, aes(x = kaffeekonsum)) +\n  geom_histogram(bins = bin) +\n  labs(\n    title = \"Histogramm des Kaffeekonsums\",\n    x = \"Kaffeekonsum\",\n    y = \"Häufigkeit\"\n  ) +\n  theme_minimal()\n\nhh\n\n\n\n\n\n\n\n\nHow does ggplot synthax work ? Think of each line of as a transparenzfolie. Each folie contains just a single portion of the plot.\nLets run the code step by step.\n\n# creates an empty plot space\n# \na &lt;- ggplot(kaffee, aes(x = konzentrationsfaehigkeit))\na\n\n\n\n\n\n\n\n\n\na + \n  geom_histogram()\n\n\n\n\n\n\n\n\n\na + \n  geom_line(aes(y = kaffeekonsum))"
+  },
+  {
+    "objectID": "posts/t-test/index.html",
+    "href": "posts/t-test/index.html",
+    "title": "t-test",
+    "section": "",
+    "text": "Eleonore arbeitet weiterhin als studentische Hilfskraft in dem Projekt zu Depression unter jungen Menschen an der Kinder- und Jugendpsychatrie. Sie hatte schon den Datensatz studie_4_depression.csv zur Analyse vorbereitet. Nun wurde diese Studie repliziert und Eleonore soll diese Daten nun auch zur Analyse vorbereiten und erste Analysen durchführen. Eleonore importiert die Daten, führt die gleichen Vorverarbeitungsschritte durch (d.h., z-Transformation anhand der Mittelwerte und Standardabweichungen der jeweiligen Erhebungsinstrumente), und schaut sich die Verteilungen der Daten an.\n\nlibrary(tidyverse)\ndf &lt;- read_csv2(\"Daten_Uebung_6.csv\")\n\nIn der ersten Analysen soll Eleonore testen, ob sich die Mittelwerte der jeweiligen untersuchten Populationen vom entsprechenden Skalenmittelwert unterscheiden. Dafür kann sie direkt die z-transformierten Werte verwenden, denn durch die z-Transformation ist der entsprechende Skalenmittelwert in allen drei Altersgruppen mu = 0 und die einzelnen Werte zeigen direkt die standardisierte Abweichung von diesem Mittelwert. Damit schätzt der jeweilige Mittelwert der z-transformierten Werte direkt die mittlere Abweichung der untersuchten Populationen vom entsprechenden Skalenmittelwert.\n\ndf |&gt; \n  group_by(questionnaire) |&gt; \n  summarise(\n    m  = mean(index_z),\n    se = sd(index)/sqrt(n())\n  )\n\n\n\nt.test(\n  Dresden %&gt;%\n    pull(Zufriedenheit_eigene_Seite),\n  mu = 18,\n  alternative = ”two.sided”)\n\n\ndf &lt;- \n  janitor::clean_names(df)\n\neigene_seite &lt;- \n  df |&gt; \n  pull(zufriedenheit_eigene_seite)\n\neigene_seite\n#&gt;  [1] 23.83 17.86 19.81 19.87 13.49 23.34 21.05 24.82 19.28 20.17 20.67 23.43\n#&gt; [13] 19.24 18.49 15.64 17.52 20.20 22.95 21.52 19.86 19.72 17.00 19.89 18.74\n#&gt; [25] 18.93 20.37 17.84 18.51 20.08 12.69 21.33 22.70 17.49 19.98 23.94 15.46\n#&gt; [37] 17.05 23.86 17.42 21.59 14.37 21.26 19.92 20.96 12.98 21.87 17.48 18.59\n#&gt; [49] 20.36 19.48\n\nt.test(eigene_seite,\n       mu = 18,\n       alternative = \"two.sided\")\n#&gt; \n#&gt;  One Sample t-test\n#&gt; \n#&gt; data:  eigene_seite\n#&gt; t = 3.7608, df = 49, p-value = 0.0004524\n#&gt; alternative hypothesis: true mean is not equal to 18\n#&gt; 95 percent confidence interval:\n#&gt;  18.69754 20.29846\n#&gt; sample estimates:\n#&gt; mean of x \n#&gt;    19.498"
+  },
+  {
+    "objectID": "posts/effect/index.html",
+    "href": "posts/effect/index.html",
+    "title": "Effect Size and Cohen’s d",
+    "section": "",
+    "text": "Imagine we are studying the effect of a new anti-ADHD medication on patient’s ability to focus. We design a controlled experiment and measure the focus time of individuals with and without the drug.\n\nlibrary(tidyverse)\n\n# focus time in min \nplacebo   &lt;- c(15, 16, 13, 15, 14, 16, 16, 17 , 13, 15, 14)\ntreatment &lt;- c(19, 19, 16, 18, 18, 17, 19, 18 , 18, 16, 16)\n\n# mean time \nmean_placebo    &lt;- mean(placebo)\nmean_treatment  &lt;- mean(treatment)\n\n# standard deviations\nsd_placebo   &lt;- sd(placebo)\nsd_treatment &lt;- sd(treatment)\n\npooled_sd &lt;- (sd_placebo + sd_treatment)/2\n\nNow we have a fictitious experiment where it seems that the drug leads to increase of focus time.\n\n# for visualisation only\ndf &lt;- \n  data.frame(\n    mean = c(mean_placebo, mean_treatment),\n    sd   = c(sd_placebo, sd_treatment)\n  ) \n\nrownames(df) &lt;- c(\"placebo\", \"treatment\")\n\n# focus time\ndf\n#&gt;               mean       sd\n#&gt; placebo   14.90909 1.300350\n#&gt; treatment 17.63636 1.206045"
+  },
+  {
+    "objectID": "posts/effect/index.html#example-experiment",
+    "href": "posts/effect/index.html#example-experiment",
+    "title": "Effect Size and Cohen’s d",
+    "section": "",
+    "text": "Imagine we are studying the effect of a new anti-ADHD medication on patient’s ability to focus. We design a controlled experiment and measure the focus time of individuals with and without the drug.\n\nlibrary(tidyverse)\n\n# focus time in min \nplacebo   &lt;- c(15, 16, 13, 15, 14, 16, 16, 17 , 13, 15, 14)\ntreatment &lt;- c(19, 19, 16, 18, 18, 17, 19, 18 , 18, 16, 16)\n\n# mean time \nmean_placebo    &lt;- mean(placebo)\nmean_treatment  &lt;- mean(treatment)\n\n# standard deviations\nsd_placebo   &lt;- sd(placebo)\nsd_treatment &lt;- sd(treatment)\n\npooled_sd &lt;- (sd_placebo + sd_treatment)/2\n\nNow we have a fictitious experiment where it seems that the drug leads to increase of focus time.\n\n# for visualisation only\ndf &lt;- \n  data.frame(\n    mean = c(mean_placebo, mean_treatment),\n    sd   = c(sd_placebo, sd_treatment)\n  ) \n\nrownames(df) &lt;- c(\"placebo\", \"treatment\")\n\n# focus time\ndf\n#&gt;               mean       sd\n#&gt; placebo   14.90909 1.300350\n#&gt; treatment 17.63636 1.206045"
+  },
+  {
+    "objectID": "posts/effect/index.html#statistical-significance",
+    "href": "posts/effect/index.html#statistical-significance",
+    "title": "Effect Size and Cohen’s d",
+    "section": "Statistical significance",
+    "text": "Statistical significance\nLets see if the increase between placebo and the treatment is statistically significant assuming p &lt; 0.05.\n\nt.test(treatment, placebo, \"greater\")\n#&gt; \n#&gt;  Welch Two Sample t-test\n#&gt; \n#&gt; data:  treatment and placebo\n#&gt; t = 5.1002, df = 19.888, p-value = 2.777e-05\n#&gt; alternative hypothesis: true difference in means is greater than 0\n#&gt; 95 percent confidence interval:\n#&gt;  1.804738      Inf\n#&gt; sample estimates:\n#&gt; mean of x mean of y \n#&gt;  17.63636  14.90909\n\nYes the diff(c(mean_placebo, mean_treatment)) is around 3 minutes and is statistically significant because there is a miniscule (only p = 0.0028 %) chance that those two sets (placebo and treatment) stem from the same underlying population. In other words there is only a very small chance that the treatment and placebo have the same mean value.\nBut what about the effect?"
+  },
+  {
+    "objectID": "posts/effect/index.html#effect-size-using-cohens-d",
+    "href": "posts/effect/index.html#effect-size-using-cohens-d",
+    "title": "Effect Size and Cohen’s d",
+    "section": "Effect size using Cohen’s d",
+    "text": "Effect size using Cohen’s d\n\nTheory\nThe effect size shows how much the treatment affects the people. How big is the change. The formulation of effect size is\n\\[\nd = \\frac{M_{\\text{med}} - M_{\\text{placebo}}}{s_{\\text{pooled}}}\n\\]\nIf the difference in the nominator would be equal the standard deviation (\\(M_{med} - M_{placebo} = s_{pooled}\\) ) then \\(d = \\frac{s_{pooled}}{s_{pooled}} = 1\\) and we woud say that on average the treatment leads to one standard deviation increase in effect. In literature 0.2 is weak effect, 0.6 is a moderate effect, and everything above 0.8 standard deviations is a very strong effect.\nLets calculate \\(d\\) for our fictitious example.\n\nd &lt;- (mean_treatment - mean_placebo)/pooled_sd\nd\n#&gt; [1] 2.176251\n\n# using function in\nlibrary(lsr)\ncohensD(treatment, placebo)\n#&gt; [1] 2.174713\n\n\n\nInterpretation\nThe effect of this drug is 2.175 times the pooled standard deviation of the study group - a very strong effect on focus time. On average, the drug leads to an increase in focus time by about (d x pooled_sd) 2.725 minutes.\nSo while statistical significance tells us that we can be sure that the numbers are trully different and not just a random realization of the same underlying process (or population), the effect size informs us about the magnitude of the difference."
+  },
+  {
+    "objectID": "posts/pipes/index.html",
+    "href": "posts/pipes/index.html",
+    "title": "Pipes",
+    "section": "",
+    "text": "The pipe %&gt;% was introduced with the tidyverse dialect back around 2015. Because it was borrowed from another library called magrittr you will often see that name too. The pipe made the code more human readable. It was so revolutionary that the R-consortium decided to introduce its own version into the standard base R dialect as |&gt; .\nThe two pipe operators have very similar behavior with one considerable difference - magrittr uses . as a placeholder to explicate the destination whereas base pipe uses _ (underscore) as a placeholder.\n\nlibrary(tidyverse)\n\n# magrittr pipe\n1:5 %&gt;% sum()\n#&gt; [1] 15\n\n# base R pipe\n1:5 |&gt; sum()\n#&gt; [1] 15\n\n# with placeholder in magrittr\n1:5 %&gt;% sum(.) \n#&gt; [1] 15\n\n# with placeholder in base R\n1:5 |&gt; sum(... = _)\n#&gt; [1] 15"
+  },
+  {
+    "objectID": "posts/pipes/index.html#what-is-the-pipe",
+    "href": "posts/pipes/index.html#what-is-the-pipe",
+    "title": "Pipes",
+    "section": "",
+    "text": "The pipe %&gt;% was introduced with the tidyverse dialect back around 2015. Because it was borrowed from another library called magrittr you will often see that name too. The pipe made the code more human readable. It was so revolutionary that the R-consortium decided to introduce its own version into the standard base R dialect as |&gt; .\nThe two pipe operators have very similar behavior with one considerable difference - magrittr uses . as a placeholder to explicate the destination whereas base pipe uses _ (underscore) as a placeholder.\n\nlibrary(tidyverse)\n\n# magrittr pipe\n1:5 %&gt;% sum()\n#&gt; [1] 15\n\n# base R pipe\n1:5 |&gt; sum()\n#&gt; [1] 15\n\n# with placeholder in magrittr\n1:5 %&gt;% sum(.) \n#&gt; [1] 15\n\n# with placeholder in base R\n1:5 |&gt; sum(... = _)\n#&gt; [1] 15"
+  },
+  {
+    "objectID": "posts/pipes/index.html#how-does-it-work",
+    "href": "posts/pipes/index.html#how-does-it-work",
+    "title": "Pipes",
+    "section": "How does it work?",
+    "text": "How does it work?\nThe pipe takes the object on its left side and brings it (pipes it) into the function on its right side. By default it pipes it to the first position in the function. Using the . placeholder (_ for base), we can explicitly send the object to a specific location in the function.\n\n# basic idea\na |&gt; f()\n# is equivalent to\nf(a)\n\na |&gt; f(b)\n# is equivalent to\nf(a, b)\n\n# with `.` placeholder for magrittr\na %&gt;% f(b, .)\n# is equivalent to \nf(b, a)\n\n# with `_` placeholder for base r\na |&gt; (b, _)\n# is equivalent to \nf(b, a)"
+  },
+  {
+    "objectID": "posts/pipes/index.html#examples",
+    "href": "posts/pipes/index.html#examples",
+    "title": "Pipes",
+    "section": "Examples",
+    "text": "Examples\nThe power of the pipe becomes apparent when we have a long sequence of consecutive operations each taking the result of the previous one. In this case we are not interested in the intermediate results, but rather in the final result.\n\nx &lt;- c(1, 4, 9, 16, 25)\n\n# long sequence of operation\nx |&gt;\n  sqrt() |&gt;\n  log() |&gt;\n  round(digits = 2) |&gt;\n  sort(decreasing = TRUE)\n#&gt; [1] 1.61 1.39 1.10 0.69 0.00\n\n# equivalent to \nx2 &lt;- sqrt(x)\nx3 &lt;- log(x2)\nx4 &lt;- round(x3, digits = 2)\nsort(x4, decreasing = TRUE)\n#&gt; [1] 1.61 1.39 1.10 0.69 0.00\n\n\n# example 2 - cleaning vector of words\nsentences &lt;- c(\" Hello \", \"world! \", \"  How \", \"are\", \" you? \")\nsentences\n#&gt; [1] \" Hello \" \"world! \" \"  How \"  \"are\"     \" you? \"\nlength(sentences)\n#&gt; [1] 5\n\n\ncleaned &lt;- \n  sentences |&gt;\n  trimws() |&gt;                           # Remove leading/trailing spaces\n  tolower() |&gt;                          # Convert to lower case\n  gsub(\"[[:punct:]]\", \"\", x = _) |&gt;     # Remove punctuation\n  paste(collapse = \" \")                 # Collapse to a single string\n\ncleaned\n#&gt; [1] \"hello world how are you\"\nlength(cleaned)\n#&gt; [1] 1"
+  },
+  {
+    "objectID": "posts/functions/index.html",
+    "href": "posts/functions/index.html",
+    "title": "Functions",
+    "section": "",
+    "text": "R is not just a tool—it’s a language. Just as any language it has:\n\nVocabulary (functions, objects)\nSyntax (rules of structure)\nGrammar (how elements combine)\nSemantics (meaning)\n\nLets learn more about the grammar of functions."
+  },
+  {
+    "objectID": "posts/functions/index.html#r-is-a-languages",
+    "href": "posts/functions/index.html#r-is-a-languages",
+    "title": "Functions",
+    "section": "",
+    "text": "R is not just a tool—it’s a language. Just as any language it has:\n\nVocabulary (functions, objects)\nSyntax (rules of structure)\nGrammar (how elements combine)\nSemantics (meaning)\n\nLets learn more about the grammar of functions."
+  },
+  {
+    "objectID": "posts/functions/index.html#functions-verbs",
+    "href": "posts/functions/index.html#functions-verbs",
+    "title": "Functions",
+    "section": "🗣️ Functions = Verbs",
+    "text": "🗣️ Functions = Verbs\nFunctions perform actions. Most functions expect input (arguments) and return a result. Think of functions as transformer, they take something in and transform it into something else.\n\nHere is a more formal representation:\n\nDoes this remind you of something? The pipe synthax looks very similar. In fact, we can use a rechtsrum (-&gt;) assignment operator to write an expression exactly like this: a |&gt; f() -&gt; b\n\n# example \na &lt;- 1:5\n\na |&gt; mean() -&gt; b\nb\n#&gt; [1] 3\n# yes you can use `-&gt;` assignment too :) \n\n# same as \nb &lt;- mean(a)\nb\n#&gt; [1] 3"
+  },
+  {
+    "objectID": "posts/functions/index.html#transformers-vs.-reducers",
+    "href": "posts/functions/index.html#transformers-vs.-reducers",
+    "title": "Functions",
+    "section": "🤖 Transformers vs. Reducers",
+    "text": "🤖 Transformers vs. Reducers\nAs I said, functions are transformers, they transform the input vector (a) into something else (b). Strictly speaking, transformers will keep the length of vectors a and b the same (length(a) == length(b)). Reducers on the other hand will squish (reduce) the length of the input vector down to (normally) 1 element. For example, summary functions like sum(), min(), max(), sd() are reducers. They reduce the information from the vector to a single value.\n\n# example\na &lt;- 1:5\n\n# transformer: a hoch 2\nb &lt;- a^2\nb\n#&gt; [1]  1  4  9 16 25\nlength(a) == length(b)\n#&gt; [1] TRUE\n\n# reducer\nc &lt;- max(a)\nc\n#&gt; [1] 5\nlength(a) == length(c)\n#&gt; [1] FALSE"
+  },
+  {
+    "objectID": "posts/functions/index.html#arguments",
+    "href": "posts/functions/index.html#arguments",
+    "title": "Functions",
+    "section": "🔤 Arguments",
+    "text": "🔤 Arguments\nThe general form of a function consist of function_name(arguments) Commonly, the first argument (often named x) is the most important and is the data (vector) which will be transformed. and the other arguments describe “how” it will be transformed.\n\n\n# vector with missing values (NA = not available)\na &lt;- c(1:100, NA, NA, NA)\ntail(a)\n#&gt; [1]  98  99 100  NA  NA  NA\n\n# NA will always propagate forward !!!\nsd(a)\n#&gt; [1] NA\n\n# remove NA\nsd(a, na.rm = TRUE)\n#&gt; [1] 29.01149\n\n# use \nhelp(mean)\n# to find out about all available options in a function"
+  },
+  {
+    "objectID": "posts/functions/index.html#under-the-hood",
+    "href": "posts/functions/index.html#under-the-hood",
+    "title": "Functions",
+    "section": "👷🏼‍♀️Under the hood",
+    "text": "👷🏼‍♀️Under the hood\nHere is how you can write your own function. You don’t need to but it is good to know what is happening behind the scenes.\n\n# x hoch y\npower &lt;- function(x, y) {\n  result &lt;- x^y\n  return(result)\n}\n\nx &lt;- 1:4\n# Call the function\npower(x, 2)\n#&gt; [1]  1  4  9 16\npower(x, 3)\n#&gt; [1]  1  8 27 64\n\nBut, functions can do anything you want and there are functions for almost anything:\n\n# bc why not\nvoice &lt;- function(x){\n  if (x == \"cat\") {\n    say &lt;- \"miau\"\n  } else if (x == \"dog\"){\n    say &lt;- \"wof wof\"\n  } else {\n    say &lt;- \"???\"\n  }\n  return(say)\n}\n\nnelly &lt;- \"cat\"\nvoice(nelly)\n#&gt; [1] \"miau\"\nvoice(\"dog\")\n#&gt; [1] \"wof wof\"\nvoice(\"capybara\")\n#&gt; [1] \"???\""
+  },
+  {
+    "objectID": "index.html",
+    "href": "index.html",
+    "title": "Data Insights",
+    "section": "",
+    "text": "Effect Size and Cohen’s d\n\n\n\n\n\n\nstatistics\n\n\neffect size\n\n\n\nMeasuring how big a difference really is: effect size and Cohen’s d for a drug experiment.\n\n\n\n\n\nJun 6, 2025\n\n\ndjani\n\n\n\n\n\n\n\n\n\n\n\n\nt-test\n\n\n\n\n\n\nstatistics\n\n\nt-test\n\n\n\nPreparing replication data on youth depression and running a t-test in R.\n\n\n\n\n\nMay 28, 2025\n\n\ndjani\n\n\n\n\n\n\n\n\n\n\n\n\nKaffee\n\n\n\n\n\n\ndata wrangling\n\n\ntidyverse\n\n\n\nImporting, grouping and summarising a coffee & concentration study with the tidyverse.\n\n\n\n\n\nMay 28, 2025\n\n\ndjani\n\n\n\n\n\n\n\n\n\n\n\n\nFunctions\n\n\n\n\n\n\nR basics\n\n\nfunctions\n\n\n\nR as a language: functions as verbs that take input and transform it into output.\n\n\n\n\n\nMay 25, 2025\n\n\ndjani\n\n\n\n\n\n\n\n\n\n\n\n\nPipes\n\n\n\n\n\n\nR basics\n\n\ntidyverse\n\n\n\nHow the magrittr %&gt;% and base R |&gt; pipes make R code readable, and how they differ.\n\n\n\n\n\nMay 24, 2025\n\n\ndjani\n\n\n\n\n\n\nNo matching items"
+  }
+]
