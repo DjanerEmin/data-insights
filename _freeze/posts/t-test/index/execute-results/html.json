@@ -1,0 +1,15 @@
+{
+  "hash": "4284208c6846e9ff18d4903d4e853335",
+  "result": {
+    "engine": "knitr",
+    "markdown": "---\ntitle: \"t-test\"\nauthor: \"djani\"\ndate: \"2025-05-28\"\ndescription: \"Preparing replication data on youth depression and running a t-test in R.\"\ncategories: [statistics, t-test]\nimage: \"pull.png\"\n---\n\n::: {.cell}\n\n:::\n\n\nEleonore arbeitet weiterhin als studentische Hilfskraft in dem Projekt zu Depression unter jungen Menschen an der Kinder- und Jugendpsychatrie. Sie hatte schon den Datensatz studie_4_depression.csv zur Analyse vorbereitet. Nun wurde diese Studie repliziert und Eleonore soll diese Daten nun auch zur Analyse vorbereiten und erste Analysen durchführen. Eleonore importiert die Daten, führt die gleichen Vorverarbeitungsschritte durch (d.h., z-Transformation anhand der Mittelwerte und Standardabweichungen der jeweiligen Erhebungsinstrumente), und schaut sich die Verteilungen der Daten an.\n\n\n::: {.cell}\n\n```{.r .cell-code}\nlibrary(tidyverse)\ndf <- read_csv2(\"Daten_Uebung_6.csv\")\n```\n:::\n\n\nIn der ersten Analysen soll Eleonore testen, ob sich die Mittelwerte der jeweiligen untersuchten Populationen vom entsprechenden Skalenmittelwert unterscheiden. Dafür kann sie direkt die z-transformierten Werte verwenden, denn durch die z-Transformation ist der entsprechende Skalenmittelwert in allen drei Altersgruppen mu = 0 und die einzelnen Werte zeigen direkt die standardisierte Abweichung von diesem Mittelwert. Damit schätzt der jeweilige Mittelwert der z-transformierten Werte direkt die mittlere Abweichung der untersuchten Populationen vom entsprechenden Skalenmittelwert.\n\n\n::: {.cell}\n\n```{.r .cell-code}\ndf |> \n  group_by(questionnaire) |> \n  summarise(\n    m  = mean(index_z),\n    se = sd(index)/sqrt(n())\n  )\n```\n:::\n\n\n![](group_by.png){width=\"235\"}\n\n\n::: {.cell}\n\n```{.r .cell-code}\nt.test(\n  Dresden %>%\n    pull(Zufriedenheit_eigene_Seite),\n  mu = 18,\n  alternative = ”two.sided”)\n```\n:::\n\n::: {.cell}\n\n```{.r .cell-code}\ndf <- \n  janitor::clean_names(df)\n\neigene_seite <- \n  df |> \n  pull(zufriedenheit_eigene_seite)\n\neigene_seite\n#>  [1] 23.83 17.86 19.81 19.87 13.49 23.34 21.05 24.82 19.28 20.17 20.67 23.43\n#> [13] 19.24 18.49 15.64 17.52 20.20 22.95 21.52 19.86 19.72 17.00 19.89 18.74\n#> [25] 18.93 20.37 17.84 18.51 20.08 12.69 21.33 22.70 17.49 19.98 23.94 15.46\n#> [37] 17.05 23.86 17.42 21.59 14.37 21.26 19.92 20.96 12.98 21.87 17.48 18.59\n#> [49] 20.36 19.48\n\nt.test(eigene_seite,\n       mu = 18,\n       alternative = \"two.sided\")\n#> \n#> \tOne Sample t-test\n#> \n#> data:  eigene_seite\n#> t = 3.7608, df = 49, p-value = 0.0004524\n#> alternative hypothesis: true mean is not equal to 18\n#> 95 percent confidence interval:\n#>  18.69754 20.29846\n#> sample estimates:\n#> mean of x \n#>    19.498\n```\n:::\n",
+    "supporting": [],
+    "filters": [
+      "rmarkdown/pagebreak.lua"
+    ],
+    "includes": {},
+    "engineDependencies": {},
+    "preserve": {},
+    "postProcess": true
+  }
+}

@@ -1,0 +1,159 @@
+---
+title: "Functions"
+author: "djani"
+date: "2025-05-25"
+description: "R as a language: functions as verbs that take input and transform it into output."
+categories: [R basics, functions]
+image: "meatgrinder2.png"
+---
+
+```{r, echo=FALSE}
+knitr::opts_chunk$set(
+  comment = "#>",
+  collapse = TRUE,
+  # cache = TRUE,
+  fig.retina = 2,
+  fig.width = 6,
+  fig.asp = 2 / 3,
+  fig.show = "hold"
+)
+```
+
+## 🧠 R is a languages
+
+R is not just a tool—it's a **language**. Just as any language it has:
+
+-   **Vocabulary** (functions, objects)
+-   **Syntax** (rules of structure)
+-   **Grammar** (how elements combine)
+-   **Semantics** (meaning)
+
+Lets learn more about the grammar of functions.
+
+## 🗣️ Functions = Verbs
+
+Functions perform actions. Most functions expect input (arguments) and `return` a result. Think of functions as transformer, they take something in and transform it into something else.
+
+![](meatgrinder2.png){width="320"}
+
+Here is a more formal representation:
+
+![](function2.png){width="262"}
+
+Does this remind you of something? The pipe synthax looks very similar. In fact, we can use a rechtsrum (`->`) assignment operator to write an expression exactly like this: `a |> f() -> b`
+
+```{r}
+# example 
+a <- 1:5
+
+a |> mean() -> b
+b
+# yes you can use `->` assignment too :) 
+
+# same as 
+b <- mean(a)
+b
+```
+
+## 🤖 Transformers vs. Reducers
+
+As I said, functions are transformers, they transform the input vector (`a`) into something else (`b`). Strictly speaking, *transformers* will keep the length of vectors `a` and `b` the same (`length(a) == length(b)`). *Reducers* on the other hand will squish (reduce) the length of the input vector down to (normally) 1 element. For example, summary functions like `sum()`, `min()`, `max()`, `sd()` are reducers. They reduce the information from the vector to a single value.
+
+```{r}
+# example
+a <- 1:5
+
+# transformer: a hoch 2
+b <- a^2
+b
+length(a) == length(b)
+
+# reducer
+c <- max(a)
+c
+length(a) == length(c)
+```
+
+![](transformerreducer.png){width="296"}
+
+## 🔤 Arguments
+
+The general form of a function consist of `function_name(arguments)` Commonly, the first argument (often named `x`) is the most important and is the data (`vector`) which will be transformed. and the other arguments describe "how" it will be transformed.
+
+![](function.png){width="413"}
+
+```{r}
+# vector with missing values (NA = not available)
+a <- c(1:100, NA, NA, NA)
+tail(a)
+
+# NA will always propagate forward !!!
+sd(a)
+
+# remove NA
+sd(a, na.rm = TRUE)
+
+# use 
+help(mean)
+# to find out about all available options in a function
+```
+
+## 👷🏼‍♀️Under the hood
+
+Here is how you can write your own function. You don't need to but it is good to know what is happening behind the scenes.
+
+```{r}
+# x hoch y
+power <- function(x, y) {
+  result <- x^y
+  return(result)
+}
+
+x <- 1:4
+# Call the function
+power(x, 2)
+power(x, 3)
+```
+
+But, functions can do anything you want and there are functions for almost anything:
+
+```{r}
+# bc why not
+voice <- function(x){
+  if (x == "cat") {
+    say <- "miau"
+  } else if (x == "dog"){
+    say <- "wof wof"
+  } else {
+    say <- "???"
+  }
+  return(say)
+}
+
+nelly <- "cat"
+voice(nelly)
+voice("dog")
+voice("capybara")
+```
+
+![](capybara.png){width="402"}
+
+```{r, echo=FALSE}
+help("mean")
+```
+
+```{r, echo = FALSE, eval=FALSE}
+helpfile <- utils:::.getHelpFile(help("mean"))
+outfile <- tempfile(fileext = ".html")
+tools:::Rd2HTML(helpfile, out =outfile)
+rawHTML <- paste(readLines(outfile), collapse="\n")
+knitr::asis_output(htmltools::htmlPreserve(rawHTML))
+
+# function definition
+# mean(x, trim = 0, na.rm = FALSE, ...)
+# # pipe syntax
+# result <- 
+#   input |> 
+#   function_name()
+
+```

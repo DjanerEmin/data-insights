@@ -1,0 +1,10 @@
+---
+title: "About"
+about:
+  template: jolla
+---
+
+**Data Insights** is a collection of hands-on R tutorials — from the basics of pipes and
+functions to data wrangling with the tidyverse and statistics like t-tests and effect sizes.
+
+Written by djani.

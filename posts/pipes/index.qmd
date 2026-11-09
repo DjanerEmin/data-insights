@@ -1,0 +1,105 @@
+---
+title: "Pipes"
+author: "djani"
+date: "2025-05-24"
+description: "How the magrittr %>% and base R |> pipes make R code readable, and how they differ."
+categories: [R basics, tidyverse]
+---
+
+```{r, echo=FALSE}
+knitr::opts_chunk$set(
+  comment = "#>",
+  collapse = TRUE,
+  # cache = TRUE,
+  fig.retina = 2,
+  fig.width = 6,
+  fig.asp = 2 / 3,
+  fig.show = "hold"
+)
+```
+
+## What is the pipe?
+
+The pipe `%>%` was introduced with the `tidyverse` dialect back around 2015. Because it was borrowed from another library called `magrittr` you will often see that name too. The pipe made the code more human readable. It was so revolutionary that the R-consortium decided to introduce its own version into the standard `base` R dialect as `|>` .
+
+The two pipe operators have very similar behavior with one considerable difference - `magrittr` uses `.` as a placeholder to explicate the destination whereas `base` pipe uses `_` (underscore) as a placeholder.
+
+```{r}
+library(tidyverse)
+
+# magrittr pipe
+1:5 %>% sum()
+
+# base R pipe
+1:5 |> sum()
+
+# with placeholder in magrittr
+1:5 %>% sum(.) 
+
+# with placeholder in base R
+1:5 |> sum(... = _)
+```
+
+## How does it work?
+
+The pipe takes the object on its left side and brings it (pipes it) into the function on its right side. By default it pipes it to the first position in the function. Using the `.` placeholder (`_` for `base`), we can explicitly send the object to a specific location in the function.
+
+```{r, eval=FALSE}
+# basic idea
+a |> f()
+# is equivalent to
+f(a)
+
+a |> f(b)
+# is equivalent to
+f(a, b)
+
+# with `.` placeholder for magrittr
+a %>% f(b, .)
+# is equivalent to 
+f(b, a)
+
+# with `_` placeholder for base r
+a |> (b, _)
+# is equivalent to 
+f(b, a)
+
+```
+
+## Examples
+
+The power of the pipe becomes apparent when we have a long sequence of consecutive operations each taking the result of the previous one. In this case we are not interested in the intermediate results, but rather in the final result.
+
+```{r}
+x <- c(1, 4, 9, 16, 25)
+
+# long sequence of operation
+x |>
+  sqrt() |>
+  log() |>
+  round(digits = 2) |>
+  sort(decreasing = TRUE)
+
+# equivalent to 
+x2 <- sqrt(x)
+x3 <- log(x2)
+x4 <- round(x3, digits = 2)
+sort(x4, decreasing = TRUE)
+
+
+# example 2 - cleaning vector of words
+sentences <- c(" Hello ", "world! ", "  How ", "are", " you? ")
+sentences
+length(sentences)
+
+
+cleaned <- 
+  sentences |>
+  trimws() |>                           # Remove leading/trailing spaces
+  tolower() |>                          # Convert to lower case
+  gsub("[[:punct:]]", "", x = _) |>     # Remove punctuation
+  paste(collapse = " ")                 # Collapse to a single string
+
+cleaned
+length(cleaned)
+```

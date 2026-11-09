@@ -1,0 +1,23 @@
+# options shared by every post
+format:
+  html:
+    toc: true
+    toc-depth: 2
+    number-sections: false
+    code-fold: false
+    code-line-numbers: false
+    fontsize: 1em
+
+execute:
+  echo: true
+  warning: false
+  message: false
+
+knitr:
+  opts_chunk:
+    comment: "#>"
+    collapse: true
+
+lang: en
+editor: visual
+title-block-banner: true

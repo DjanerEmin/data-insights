@@ -1,0 +1,8 @@
+/.quarto/
+/_site/
+.Rproj.user
+.Rhistory
+.DS_Store
+
+# course data, kept local
+*.csv
