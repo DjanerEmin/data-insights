@@ -181,7 +181,7 @@ window.Quarto = {
 <!-- margin-sidebar -->
     <div id="quarto-margin-sidebar" class="sidebar margin-sidebar">
         
-    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(5)</span></div><div class="category" data-category="R basics">R basics <span class="quarto-category-count">(2)</span></div><div class="category" data-category="data wrangling">data wrangling <span class="quarto-category-count">(1)</span></div><div class="category" data-category="effect size">effect size <span class="quarto-category-count">(1)</span></div><div class="category" data-category="functions">functions <span class="quarto-category-count">(1)</span></div><div class="category" data-category="statistics">statistics <span class="quarto-category-count">(2)</span></div><div class="category" data-category="t-test">t-test <span class="quarto-category-count">(1)</span></div><div class="category" data-category="tidyverse">tidyverse <span class="quarto-category-count">(2)</span></div></div></div>
+    <h5 class="quarto-listing-category-title">Categories</h5><div class="quarto-listing-category category-default"><div class="category" data-category="">All <span class="quarto-category-count">(6)</span></div><div class="category" data-category="R basics">R basics <span class="quarto-category-count">(3)</span></div><div class="category" data-category="data structures">data structures <span class="quarto-category-count">(1)</span></div><div class="category" data-category="data wrangling">data wrangling <span class="quarto-category-count">(1)</span></div><div class="category" data-category="effect size">effect size <span class="quarto-category-count">(1)</span></div><div class="category" data-category="functions">functions <span class="quarto-category-count">(1)</span></div><div class="category" data-category="statistics">statistics <span class="quarto-category-count">(2)</span></div><div class="category" data-category="t-test">t-test <span class="quarto-category-count">(1)</span></div><div class="category" data-category="tidyverse">tidyverse <span class="quarto-category-count">(2)</span></div></div></div>
 <!-- main -->
 <main class="content quarto-banner-title-block column-page-left" id="quarto-document-content">
 
@@ -375,6 +375,42 @@ djani
 </a>
 </div>
 </div>
+<div class="quarto-post image-right" data-index="5" data-categories="R basics,data structures" data-listing-date-sort="1747951200000" data-listing-file-modified-sort="1794312391707" data-listing-date-modified-sort="NaN" data-listing-reading-time-sort="5" data-listing-word-count-sort="995">
+<div class="thumbnail">
+<p><a href="./posts/vectors/index.html" class="no-external"></a></p><a href="./posts/vectors/index.html" class="no-external">
+<p><img src="./posts/vectors/subsetting.png" class="thumbnail-image"></p>
+</a><p><a href="./posts/vectors/index.html" class="no-external"></a></p>
+</div>
+<div class="body">
+<h3 class="no-anchor listing-title">
+<a href="./posts/vectors/index.html" class="no-external">Vectors</a>
+</h3>
+<div class="listing-subtitle">
+<a href="./posts/vectors/index.html" class="no-external"></a>
+</div>
+<div class="listing-categories">
+<div class="listing-category" onclick="window.quartoListingCategory('R basics'); return false;">
+R basics
+</div>
+<div class="listing-category" onclick="window.quartoListingCategory('data structures'); return false;">
+data structures
+</div>
+</div>
+<div class="listing-description">
+<a href="./posts/vectors/index.html" class="no-external">The most basic data structure in R: vector types, subsetting with logical vectors, and combining vectors into a data frame.</a>
+</div>
+</div>
+<div class="metadata">
+<a href="./posts/vectors/index.html" class="no-external">
+<div class="listing-date">
+May 23, 2025
+</div>
+<div class="listing-author">
+djani
+</div>
+</a>
+</div>
+</div>
 </div>
 <div class="listing-no-matching d-none">
 No matching items
@@ -461,7 +497,7 @@ window.document.addEventListener("DOMContentLoaded", function (event) {
   });
     var localhostRegex = new RegExp(/^(?:http|https):\/\/localhost\:?[0-9]*\//);
     var mailtoRegex = new RegExp(/^mailto:/);
-      var filterRegex = new RegExp("https:\/\/DjanerEmin\.github\.io\/data-insights\/");
+      var filterRegex = new RegExp('/' + window.location.host + '/');
     var isInternal = (href) => {
         return filterRegex.test(href) || localhostRegex.test(href) || mailtoRegex.test(href);
     }
