@@ -93,7 +93,9 @@ name[is_married]
 ### 📅 Date vector:
 
 ```{r}
-# i will generate 5 random birthdays 
+# i will generate 5 random birthdays
+# set.seed() makes the random draw reproducible
+set.seed(42)
 
 # all are born in the year 2000
 beginning <- as.Date("2000-01-01")
