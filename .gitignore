@@ -6,3 +6,5 @@
 
 # course data, kept local
 *.csv
+
+**/*.quarto_ipynb

@@ -1,0 +1,141 @@
+---
+title: "Understanding Base R Syntax and Grammar"
+author: "djani"
+date: "2025-05-22"
+description: "The core grammar of base R: expressions, assignment, function calls, indexing, control structures and the apply family."
+categories: [R basics, syntax]
+---
+
+## 🧠 What Is Base R?
+
+-   **Base R** is the core language of R—everything available without additional packages.
+-   Think of it as the **standard grammar** of the R language.
+-   It emphasizes:
+    -   Functional programming
+    -   Compact expressions
+    -   Explicit control over data
+
+------------------------------------------------------------------------
+
+## 🧱 Basic Syntax: Expressions in R
+
+-   An expression in R is made up of:
+    -   **Objects** (variables)
+    -   **Functions**
+    -   **Operators**
+
+``` r
+x <- c(1, 2, 3)
+mean(x)
+```
+
+-   `<-` is the assignment operator.
+-   `c()` is a function to combine values into a vector.
+-   `mean()` is a function to compute the average.
+
+------------------------------------------------------------------------
+
+## ✍️ Assignment
+
+-   Assign values using `<-` or `=`
+-   `<-` is preferred in Base R style.
+
+``` r
+x <- 10        # preferred
+y = 5          # valid, but less idiomatic
+```
+
+-   R is **case sensitive**: `x` ≠ `X`
+
+------------------------------------------------------------------------
+
+## 🔧 Function Grammar
+
+-   Functions follow this structure:
+
+``` r
+function_name(argument1, argument2, ...)
+```
+
+-   Example:
+
+``` r
+sum(1, 2, 3)
+log(100, base = 10)
+```
+
+-   Arguments can be **positional** or **named**
+
+------------------------------------------------------------------------
+
+## 🪄 Indexing and Subsetting
+
+-   Use `[]` to subset data:
+
+``` r
+x <- c("a", "b", "c", "d")
+x[2]         # returns "b"
+```
+
+-   For matrices and data frames:
+
+``` r
+m <- matrix(1:9, nrow = 3)
+m[1, 2]      # row 1, column 2
+```
+
+------------------------------------------------------------------------
+
+## 🔁 Control Structures
+
+-   Base R includes standard control flow:
+
+``` r
+if (x > 5) {
+  print("Greater")
+} else {
+  print("Smaller")
+}
+
+for (i in 1:5) {
+  print(i)
+}
+```
+
+-   Other structures: `while`, `repeat`, `switch`
+
+------------------------------------------------------------------------
+
+## 🔄 Apply Family
+
+-   Compact alternatives to loops:
+
+``` r
+x <- list(1:5, 6:10)
+lapply(x, mean)
+```
+
+-   Common apply functions: `lapply()`, `sapply()`, `apply()`, `tapply()`
+
+------------------------------------------------------------------------
+
+## 🧾 Summary
+
+| Feature       | Syntax Example      | Purpose            |
+|---------------|---------------------|--------------------|
+| Assignment    | `x <- 5`            | Store values       |
+| Function Call | `mean(x)`           | Perform operations |
+| Indexing      | `x[1]`              | Access elements    |
+| Conditionals  | `if (x > 5)`        | Control logic      |
+| Looping       | `for (i in x)`      | Repeat tasks       |
+| Apply         | `lapply(list, FUN)` | Functional looping |
+
+------------------------------------------------------------------------
+
+## 🧠 Takeaways
+
+-   Base R is expressive and flexible.
+-   Mastering its grammar gives you deeper control and understanding.
+-   It is foundational for all R dialects and extensions.
+
+> Understanding Base R is like mastering Latin—it's the root of many powerful expressions.

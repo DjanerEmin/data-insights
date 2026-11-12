@@ -1,0 +1,137 @@
+---
+title: "R as a Language"
+author: "djani"
+date: "2025-05-20"
+description: "Learning R like a language: its vocabulary of objects and functions, operators, syntax, basic data types and data structures."
+categories: [R basics, syntax]
+---
+
+## 🧠 Programming Languages as Languages
+
+- R is not just a tool—it's a **language**.
+- Like natural languages, it has:
+  - **Vocabulary** (functions, objects)
+  - **Syntax** (rules of structure)
+  - **Grammar** (how elements combine)
+  - **Semantics** (meaning)
+  - **Pragmatics** (contextual behavior)
+
+------------------------------------------------------------------------
+
+## 🗣 Vocabulary: The Words of R
+
+| Linguistics  | R Equivalent |                                                 |
+|---------------|---------------|------------------------------------------|
+| Nouns        | Objects      | `x`, `df`, `mtcars`, `foo`, `bar` , `Statistic` |
+| Verbs        | Functions    | `function_name(x, arg1, ...)`                   |
+| Prepositions | Operators    | `+`, `==`, `%>%` ,`|>`                          |
+
+------------------------------------------------------------------------
+
+## 📚 Common Base R Functions: Your Vocabulary List
+
+Here are some of the most frequently used Base R functions—your essential "verbs" for working with data:
+
+- **Data creation**: `c()`, `seq()`, `rep()`, `matrix()`, `list()`, `data.frame()`
+- **Summarizing**: `mean()`, `sum()`, `min()`, `max()`, `sd()`, `summary()`
+- **Subsetting**: `[ ]`, `which()`, `subset()`
+- **Logical tests**: `is.na()`, `any()`, `all()`, `identical()`
+- **Conversions**: `as.numeric()`, `as.character()`, `as.factor()`
+- **Math & stats**: `log()`, `exp()`, `sqrt()`, `cor()`, `lm()`
+- **Output & inspection**: `print()`, `str()`, `head()`, `tail()`, `class()`, `length()`
+
+------------------------------------------------------------------------
+
+## ➕ Arithmetic & Logical Operators in Base R
+
+### 🧮 Arithmetic Operators
+
+- `+` — addition\
+- `-` — subtraction\
+- `*` — multiplication\
+- `/` — division\
+- `^` or `**` — exponentiation\
+- `%%` — modulo (remainder)\
+- `%/%` — integer division
+
+### 🔍 Logical Comparison Operators
+
+- `==` — equal to\
+- `!=` — not equal to\
+- `>` — greater than\
+- `<` — less than\
+- `>=` — greater than or equal to\
+- `<=` — less than or equal to
+
+### 🧠 Logical (Boolean) Operators
+
+- `&` — element-wise AND\
+- `|` — element-wise OR\
+- `!` — NOT\
+- `&&` — short-circuit AND (first element only)\
+- `||` — short-circuit OR (first element only)
+
+------------------------------------------------------------------------
+
+## 🧱 Syntax and Grammar
+
+- **Syntax** = Structure of expressions
+  - e.g. `mean(c(1, 2, 3))`
+
+``` r
+1 / 200 * 30
+#> [1] 0.15
+
+(59 + 73 + 2) / 3
+#> [1] 44.66667
+
+sin(pi / 2)
+#> [1] 1
+
+x <- c(1, 2, 3)
+x
+#> [1] 1 2 3
+
+mean(x)  
+#> [1] 2
+
+y <- 2 * 3
+y
+#> [1] 6
+
+x + y
+#> [1] 7 8 9 
+
+x * 2 
+#> [1] 2 4 6 
+```
+
+------------------------------------------------------------------------
+
+## 🔤 Basic Data Types in Base R
+
+| Data Type | Code Example   | Description                                    |
+|---------------|---------------|------------------------------------------|
+| Numeric   | `x <- 3.14`    | A real (floating point) number                 |
+| Integer   | `x <- 5L`      | An integer value (note the `L`)                |
+| Character | `x <- "hello"` | A text (string) value                          |
+| Logical   | `x <- TRUE`    | A Boolean value: `TRUE` or `FALSE`             |
+| Complex   | `x <- 1 + 2i`  | A complex number with real and imaginary parts |
+
+```{r, echo=TRUE}
+x <- 3.14
+class(x)
+```
+
+------------------------------------------------------------------------
+
+## 📦 Data structures
+
+| Data Structure | Code Example | Description |
+|-----------------|-----------------------------|---------------------------|
+| Vector | `x <- 1:5` | A sequence of numbers from 1 to 5 |
+| Matrix | `x <- matrix(1:6, nrow = 2)` | 2-row matrix filled column-wise |
+| List | `x <- list(a = 1:5, b = c(1,2,3))` | Named list with two elements |
+| Data Frame | `x <- data.frame(a = 1:5, b = 6:10)` | Tabular structure with two columns |
+
+------------------------------------------------------------------------
