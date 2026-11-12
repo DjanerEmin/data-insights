@@ -77,6 +77,132 @@
     "text": "🧮 Data Frame\nData frame is table. Each column of the table is a vectors.\n\npeople &lt;- \n  data.frame(name, birthday, height, weight, gender, is_married)\n\npeople\n#&gt;      name   birthday height weight  gender is_married\n#&gt; 1   Alice 2000-01-24   1.71     56  female       TRUE\n#&gt; 2     Bob 2000-11-22   1.82     80    male      FALSE\n#&gt; 3 Charlie 2000-12-21   1.78     75 diverse       TRUE\n#&gt; 4  Olivia 2000-03-29   1.68     54  female      FALSE\n#&gt; 5     Max 2000-06-13   1.95     95    male      FALSE\n\nclass(people)\n#&gt; [1] \"data.frame\"\n\n# now we can do some data analysis using\nlibrary(tidyverse)\n\n# like finding out who\npeople |&gt; \n  filter(is_married)\n#&gt;      name   birthday height weight  gender is_married\n#&gt; 1   Alice 2000-01-24   1.71     56  female       TRUE\n#&gt; 2 Charlie 2000-12-21   1.78     75 diverse       TRUE\n\n# or who is\npeople |&gt; \n  filter(gender == \"male\",\n         height &gt; 1.90)\n#&gt;   name   birthday height weight gender is_married\n#&gt; 1  Max 2000-06-13   1.95     95   male      FALSE\n\n# more next time :)"
   },
   {
+    "objectID": "posts/base-r-syntax-grammar/index.html",
+    "href": "posts/base-r-syntax-grammar/index.html",
+    "title": "Understanding Base R Syntax and Grammar",
+    "section": "",
+    "text": "Base R is the core language of R—everything available without additional packages.\nThink of it as the standard grammar of the R language.\nIt emphasizes:\n\nFunctional programming\nCompact expressions\nExplicit control over data"
+  },
+  {
+    "objectID": "posts/base-r-syntax-grammar/index.html#what-is-base-r",
+    "href": "posts/base-r-syntax-grammar/index.html#what-is-base-r",
+    "title": "Understanding Base R Syntax and Grammar",
+    "section": "",
+    "text": "Base R is the core language of R—everything available without additional packages.\nThink of it as the standard grammar of the R language.\nIt emphasizes:\n\nFunctional programming\nCompact expressions\nExplicit control over data"
+  },
+  {
+    "objectID": "posts/base-r-syntax-grammar/index.html#basic-syntax-expressions-in-r",
+    "href": "posts/base-r-syntax-grammar/index.html#basic-syntax-expressions-in-r",
+    "title": "Understanding Base R Syntax and Grammar",
+    "section": "🧱 Basic Syntax: Expressions in R",
+    "text": "🧱 Basic Syntax: Expressions in R\n\nAn expression in R is made up of:\n\nObjects (variables)\nFunctions\nOperators\n\n\nx &lt;- c(1, 2, 3)\nmean(x)\n\n&lt;- is the assignment operator.\nc() is a function to combine values into a vector.\nmean() is a function to compute the average."
+  },
+  {
+    "objectID": "posts/base-r-syntax-grammar/index.html#assignment",
+    "href": "posts/base-r-syntax-grammar/index.html#assignment",
+    "title": "Understanding Base R Syntax and Grammar",
+    "section": "✍️ Assignment",
+    "text": "✍️ Assignment\n\nAssign values using &lt;- or =\n&lt;- is preferred in Base R style.\n\nx &lt;- 10        # preferred\ny = 5          # valid, but less idiomatic\n\nR is case sensitive: x ≠ X"
+  },
+  {
+    "objectID": "posts/base-r-syntax-grammar/index.html#function-grammar",
+    "href": "posts/base-r-syntax-grammar/index.html#function-grammar",
+    "title": "Understanding Base R Syntax and Grammar",
+    "section": "🔧 Function Grammar",
+    "text": "🔧 Function Grammar\n\nFunctions follow this structure:\n\nfunction_name(argument1, argument2, ...)\n\nExample:\n\nsum(1, 2, 3)\nlog(100, base = 10)\n\nArguments can be positional or named"
+  },
+  {
+    "objectID": "posts/base-r-syntax-grammar/index.html#indexing-and-subsetting",
+    "href": "posts/base-r-syntax-grammar/index.html#indexing-and-subsetting",
+    "title": "Understanding Base R Syntax and Grammar",
+    "section": "🪄 Indexing and Subsetting",
+    "text": "🪄 Indexing and Subsetting\n\nUse [] to subset data:\n\nx &lt;- c(\"a\", \"b\", \"c\", \"d\")\nx[2]         # returns \"b\"\n\nFor matrices and data frames:\n\nm &lt;- matrix(1:9, nrow = 3)\nm[1, 2]      # row 1, column 2"
+  },
+  {
+    "objectID": "posts/base-r-syntax-grammar/index.html#control-structures",
+    "href": "posts/base-r-syntax-grammar/index.html#control-structures",
+    "title": "Understanding Base R Syntax and Grammar",
+    "section": "🔁 Control Structures",
+    "text": "🔁 Control Structures\n\nBase R includes standard control flow:\n\nif (x &gt; 5) {\n  print(\"Greater\")\n} else {\n  print(\"Smaller\")\n}\n\nfor (i in 1:5) {\n  print(i)\n}\n\nOther structures: while, repeat, switch"
+  },
+  {
+    "objectID": "posts/base-r-syntax-grammar/index.html#apply-family",
+    "href": "posts/base-r-syntax-grammar/index.html#apply-family",
+    "title": "Understanding Base R Syntax and Grammar",
+    "section": "🔄 Apply Family",
+    "text": "🔄 Apply Family\n\nCompact alternatives to loops:\n\nx &lt;- list(1:5, 6:10)\nlapply(x, mean)\n\nCommon apply functions: lapply(), sapply(), apply(), tapply()"
+  },
+  {
+    "objectID": "posts/base-r-syntax-grammar/index.html#summary",
+    "href": "posts/base-r-syntax-grammar/index.html#summary",
+    "title": "Understanding Base R Syntax and Grammar",
+    "section": "🧾 Summary",
+    "text": "🧾 Summary\n\n\n\nFeature\nSyntax Example\nPurpose\n\n\n\n\nAssignment\nx &lt;- 5\nStore values\n\n\nFunction Call\nmean(x)\nPerform operations\n\n\nIndexing\nx[1]\nAccess elements\n\n\nConditionals\nif (x &gt; 5)\nControl logic\n\n\nLooping\nfor (i in x)\nRepeat tasks\n\n\nApply\nlapply(list, FUN)\nFunctional looping"
+  },
+  {
+    "objectID": "posts/base-r-syntax-grammar/index.html#takeaways",
+    "href": "posts/base-r-syntax-grammar/index.html#takeaways",
+    "title": "Understanding Base R Syntax and Grammar",
+    "section": "🧠 Takeaways",
+    "text": "🧠 Takeaways\n\nBase R is expressive and flexible.\nMastering its grammar gives you deeper control and understanding.\nIt is foundational for all R dialects and extensions.\n\n\nUnderstanding Base R is like mastering Latin—it’s the root of many powerful expressions."
+  },
+  {
+    "objectID": "posts/r-as-language/index.html",
+    "href": "posts/r-as-language/index.html",
+    "title": "R as a Language",
+    "section": "",
+    "text": "R is not just a tool—it’s a language.\nLike natural languages, it has:\n\nVocabulary (functions, objects)\nSyntax (rules of structure)\nGrammar (how elements combine)\nSemantics (meaning)\nPragmatics (contextual behavior)"
+  },
+  {
+    "objectID": "posts/r-as-language/index.html#programming-languages-as-languages",
+    "href": "posts/r-as-language/index.html#programming-languages-as-languages",
+    "title": "R as a Language",
+    "section": "",
+    "text": "R is not just a tool—it’s a language.\nLike natural languages, it has:\n\nVocabulary (functions, objects)\nSyntax (rules of structure)\nGrammar (how elements combine)\nSemantics (meaning)\nPragmatics (contextual behavior)"
+  },
+  {
+    "objectID": "posts/r-as-language/index.html#vocabulary-the-words-of-r",
+    "href": "posts/r-as-language/index.html#vocabulary-the-words-of-r",
+    "title": "R as a Language",
+    "section": "🗣 Vocabulary: The Words of R",
+    "text": "🗣 Vocabulary: The Words of R\n\n\n\n\n\n\n\n\nLinguistics\nR Equivalent\n\n\n\n\n\nNouns\nObjects\nx, df, mtcars, foo, bar , Statistic\n\n\nVerbs\nFunctions\nfunction_name(x, arg1, ...)\n\n\nPrepositions\nOperators\n+, ==, %&gt;% ,|&gt;"
+  },
+  {
+    "objectID": "posts/r-as-language/index.html#common-base-r-functions-your-vocabulary-list",
+    "href": "posts/r-as-language/index.html#common-base-r-functions-your-vocabulary-list",
+    "title": "R as a Language",
+    "section": "📚 Common Base R Functions: Your Vocabulary List",
+    "text": "📚 Common Base R Functions: Your Vocabulary List\nHere are some of the most frequently used Base R functions—your essential “verbs” for working with data:\n\nData creation: c(), seq(), rep(), matrix(), list(), data.frame()\nSummarizing: mean(), sum(), min(), max(), sd(), summary()\nSubsetting: [ ], which(), subset()\nLogical tests: is.na(), any(), all(), identical()\nConversions: as.numeric(), as.character(), as.factor()\nMath & stats: log(), exp(), sqrt(), cor(), lm()\nOutput & inspection: print(), str(), head(), tail(), class(), length()"
+  },
+  {
+    "objectID": "posts/r-as-language/index.html#arithmetic-logical-operators-in-base-r",
+    "href": "posts/r-as-language/index.html#arithmetic-logical-operators-in-base-r",
+    "title": "R as a Language",
+    "section": "➕ Arithmetic & Logical Operators in Base R",
+    "text": "➕ Arithmetic & Logical Operators in Base R\n\n🧮 Arithmetic Operators\n\n+ — addition\n\n- — subtraction\n\n* — multiplication\n\n/ — division\n\n^ or ** — exponentiation\n\n%% — modulo (remainder)\n\n%/% — integer division\n\n\n\n🔍 Logical Comparison Operators\n\n== — equal to\n\n!= — not equal to\n\n&gt; — greater than\n\n&lt; — less than\n\n&gt;= — greater than or equal to\n\n&lt;= — less than or equal to\n\n\n\n🧠 Logical (Boolean) Operators\n\n& — element-wise AND\n\n| — element-wise OR\n\n! — NOT\n\n&& — short-circuit AND (first element only)\n\n|| — short-circuit OR (first element only)"
+  },
+  {
+    "objectID": "posts/r-as-language/index.html#syntax-and-grammar",
+    "href": "posts/r-as-language/index.html#syntax-and-grammar",
+    "title": "R as a Language",
+    "section": "🧱 Syntax and Grammar",
+    "text": "🧱 Syntax and Grammar\n\nSyntax = Structure of expressions\n\ne.g. mean(c(1, 2, 3))\n\n\n1 / 200 * 30\n#&gt; [1] 0.15\n\n(59 + 73 + 2) / 3\n#&gt; [1] 44.66667\n\nsin(pi / 2)\n#&gt; [1] 1\n\nx &lt;- c(1, 2, 3)\nx\n#&gt; [1] 1 2 3\n\nmean(x)  \n#&gt; [1] 2\n\ny &lt;- 2 * 3\ny\n#&gt; [1] 6\n\nx + y\n#&gt; [1] 7 8 9 \n\nx * 2 \n#&gt; [1] 2 4 6"
+  },
+  {
+    "objectID": "posts/r-as-language/index.html#basic-data-types-in-base-r",
+    "href": "posts/r-as-language/index.html#basic-data-types-in-base-r",
+    "title": "R as a Language",
+    "section": "🔤 Basic Data Types in Base R",
+    "text": "🔤 Basic Data Types in Base R\n\n\n\n\n\n\n\n\nData Type\nCode Example\nDescription\n\n\n\n\nNumeric\nx &lt;- 3.14\nA real (floating point) number\n\n\nInteger\nx &lt;- 5L\nAn integer value (note the L)\n\n\nCharacter\nx &lt;- \"hello\"\nA text (string) value\n\n\nLogical\nx &lt;- TRUE\nA Boolean value: TRUE or FALSE\n\n\nComplex\nx &lt;- 1 + 2i\nA complex number with real and imaginary parts\n\n\n\n\nx &lt;- 3.14\nclass(x)\n#&gt; [1] \"numeric\""
+  },
+  {
+    "objectID": "posts/r-as-language/index.html#data-structures",
+    "href": "posts/r-as-language/index.html#data-structures",
+    "title": "R as a Language",
+    "section": "📦 Data structures",
+    "text": "📦 Data structures\n\n\n\n\n\n\n\n\nData Structure\nCode Example\nDescription\n\n\n\n\nVector\nx &lt;- 1:5\nA sequence of numbers from 1 to 5\n\n\nMatrix\nx &lt;- matrix(1:6, nrow = 2)\n2-row matrix filled column-wise\n\n\nList\nx &lt;- list(a = 1:5, b = c(1,2,3))\nNamed list with two elements\n\n\nData Frame\nx &lt;- data.frame(a = 1:5, b = 6:10)\nTabular structure with two columns"
+  },
+  {
     "objectID": "posts/effect/index.html",
     "href": "posts/effect/index.html",
     "title": "Effect Size and Cohen’s d",
@@ -179,6 +305,6 @@
     "href": "index.html",
     "title": "Data Insights",
     "section": "",
-    "text": "Effect Size and Cohen’s d\n\n\n\n\n\n\nstatistics\n\n\neffect size\n\n\n\nMeasuring how big a difference really is: effect size and Cohen’s d for a drug experiment.\n\n\n\n\n\nJun 6, 2025\n\n\ndjani\n\n\n\n\n\n\n\n\n\n\n\n\nt-test\n\n\n\n\n\n\nstatistics\n\n\nt-test\n\n\n\nPreparing replication data on youth depression and running a t-test in R.\n\n\n\n\n\nMay 28, 2025\n\n\ndjani\n\n\n\n\n\n\n\n\n\n\n\n\nKaffee\n\n\n\n\n\n\ndata wrangling\n\n\ntidyverse\n\n\n\nImporting, grouping and summarising a coffee & concentration study with the tidyverse.\n\n\n\n\n\nMay 28, 2025\n\n\ndjani\n\n\n\n\n\n\n\n\n\n\n\n\nFunctions\n\n\n\n\n\n\nR basics\n\n\nfunctions\n\n\n\nR as a language: functions as verbs that take input and transform it into output.\n\n\n\n\n\nMay 25, 2025\n\n\ndjani\n\n\n\n\n\n\n\n\n\n\n\n\nPipes\n\n\n\n\n\n\nR basics\n\n\ntidyverse\n\n\n\nHow the magrittr %&gt;% and base R |&gt; pipes make R code readable, and how they differ.\n\n\n\n\n\nMay 24, 2025\n\n\ndjani\n\n\n\n\n\n\n\n\n\n\n\n\nVectors\n\n\n\n\n\n\nR basics\n\n\ndata structures\n\n\n\nThe most basic data structure in R: vector types, subsetting with logical vectors, and combining vectors into a data frame.\n\n\n\n\n\nMay 23, 2025\n\n\ndjani\n\n\n\n\n\n\nNo matching items"
+    "text": "Effect Size and Cohen’s d\n\n\n\nstatistics\n\neffect size\n\n\n\nMeasuring how big a difference really is: effect size and Cohen’s d for a drug experiment.\n\n\n\n\n\nJun 6, 2025\n\n\ndjani\n\n\n\n\n\n\n\n\n\n\n\n\nt-test\n\n\n\nstatistics\n\nt-test\n\n\n\nPreparing replication data on youth depression and running a t-test in R.\n\n\n\n\n\nMay 28, 2025\n\n\ndjani\n\n\n\n\n\n\n\n\n\n\n\n\nKaffee\n\n\n\ndata wrangling\n\ntidyverse\n\n\n\nImporting, grouping and summarising a coffee & concentration study with the tidyverse.\n\n\n\n\n\nMay 28, 2025\n\n\ndjani\n\n\n\n\n\n\n\n\n\n\n\n\nFunctions\n\n\n\nR basics\n\nfunctions\n\n\n\nR as a language: functions as verbs that take input and transform it into output.\n\n\n\n\n\nMay 25, 2025\n\n\ndjani\n\n\n\n\n\n\n\n\n\n\n\n\nPipes\n\n\n\nR basics\n\ntidyverse\n\n\n\nHow the magrittr %&gt;% and base R |&gt; pipes make R code readable, and how they differ.\n\n\n\n\n\nMay 24, 2025\n\n\ndjani\n\n\n\n\n\n\n\n\n\n\n\n\nVectors\n\n\n\nR basics\n\ndata structures\n\n\n\nThe most basic data structure in R: vector types, subsetting with logical vectors, and combining vectors into a data frame.\n\n\n\n\n\nMay 23, 2025\n\n\ndjani\n\n\n\n\n\n\n\n\n\n\n\n\nUnderstanding Base R Syntax and Grammar\n\n\n\nR basics\n\nsyntax\n\n\n\nThe core grammar of base R: expressions, assignment, function calls, indexing, control structures and the apply family.\n\n\n\n\n\nMay 22, 2025\n\n\ndjani\n\n\n\n\n\n\n\n\n\n\n\n\nR as a Language\n\n\n\nR basics\n\nsyntax\n\n\n\nLearning R like a language: its vocabulary of objects and functions, operators, syntax, basic data types and data structures.\n\n\n\n\n\nMay 20, 2025\n\n\ndjani\n\n\n\n\n\nNo matching items"
   }
 ]
